@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         String sharedPrefString = SunshinePreferences.getPreferredWeatherLocation(this);
         URL url = NetworkUtils.buildUrl(sharedPrefString);
+        // TODO: AsyncTask baslatilirken icine ne alir.
         new FetchWetterData().execute(url);
 
 
@@ -80,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
             URL searchUrl = params[0];
             String results = null;
+            // TODO: try  catch kod blogunu kontrol et
             try {
+
                 results = NetworkUtils.getResponseFromHttpUrl(searchUrl);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -92,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {//s=results
+            // TODO: appendlenecek veriyi kontrol et
             mWeatherTextView.append(s);
         }
     }
